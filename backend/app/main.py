@@ -8,8 +8,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 import os
 import uuid
-from app.preprocessing import process_dicom
-from app.inference import load_all_models, predict_all_models, load_model
+from backend.app.preprocessing import process_dicom
+from backend.app.inference import load_all_models, predict_all_models, load_model
 import logging
 
 logging.basicConfig(
