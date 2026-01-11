@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detection - ICH Detection System</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/dark-mode.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="logo-icon">🧠</span>
+          <span class="logo-text">ICH Detection</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="detection.html" class="nav-link active">Detection</a>
+          <a href="about-ich.html" class="nav-link">About ICH</a>
+          <a href="methodology.html" class="nav-link">Methodology</a>
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Detection Section -->
+    <section class="detection-section">
+      <div class="detection-container">
+        <h1 class="detection-title">Upload CT Scan</h1>
+        <p class="detection-subtitle">
+          Upload a DICOM (.dcm) file for hemorrhage detection
+        </p>
+
+        <div class="upload-card">
+          <div class="upload-area" id="upload-area">
+            <input
+              type="file"
+              id="dicom-file"
+              accept=".dcm"
+              style="display: none"
+            />
+            <div class="upload-icon">📁</div>
+            <p class="upload-text">Click to select DICOM file</p>
+            <p class="upload-hint">or drag and drop here</p>
+            <p class="file-name" id="file-name"></p>
+          </div>
+
+          <button class="run-button" id="run-button" disabled>
+            Run Detection
+          </button>
+        </div>
+
+        <div class="info-box">
+          <h3>Requirements</h3>
+          <ul>
+            <li>File format: DICOM (.dcm)</li>
+            <li>Image type: Brain CT scan</li>
+            <li>Maximum file size: 50 MB</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <p class="loading-text">Processing CT scan...</p>
+        <p class="loading-subtext">
+          Applying HU windowing and running inference
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="collaboration-info">
+          <h3>🤝 Collaborative Research Project</h3>
+          <p class="collaboration-partners">
+            <strong>Institut Teknologi Sumatra</strong> ×
+            <strong>Universiti Malaysia Perlis</strong>
+          </p>
+        </div>
+        <div class="footer-divider"></div>
+        <p>© 2024 ICH Detection System | Academic Research Project</p>
+      </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/detection.js"></script>
+  </body>
+</html>

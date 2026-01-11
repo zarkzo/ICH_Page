@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results - ICH Detection System</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/dark-mode.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="logo-icon">🧠</span>
+          <span class="logo-text">ICH Detection</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="detection.html" class="nav-link">Detection</a>
+          <a href="about-ich.html" class="nav-link">About ICH</a>
+          <a href="methodology.html" class="nav-link">Methodology</a>
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Results Section -->
+    <section class="results-section">
+      <div class="results-container">
+        <h1 class="results-title">Multi-Model Detection Results</h1>
+
+        <!-- Images Grid -->
+        <div class="images-grid">
+          <div class="image-card">
+            <h3>Original CT Scan</h3>
+            <img
+              id="original-image"
+              src=""
+              alt="Original CT"
+              style="width: 100%; border-radius: 8px"
+            />
+            <p class="image-caption">Raw DICOM image</p>
+          </div>
+          <div class="image-card">
+            <h3>Processed Image</h3>
+            <img
+              id="processed-image"
+              src=""
+              alt="Processed CT"
+              style="width: 100%; border-radius: 8px"
+            />
+            <p class="image-caption">Multi-window RGB (256×256)</p>
+          </div>
+        </div>
+
+        <!-- Model Comparison Grid -->
+        <div class="model-comparison-grid" id="model-comparison">
+          <!-- Model cards will be inserted here by JavaScript -->
+        </div>
+
+        <!-- ICH Types Information with Clickable Labels -->
+        <div class="info-card">
+          <h2>About ICH Types (Click to learn more)</h2>
+          <div class="ich-info-grid">
+            <div
+              class="ich-info-item clickable"
+              data-ich-type="Intraparenchymal"
+            >
+              <h3>Intraparenchymal <span class="info-icon">ℹ️</span></h3>
+              <p>Bleeding within the brain tissue itself</p>
+            </div>
+            <div
+              class="ich-info-item clickable"
+              data-ich-type="Intraventricular"
+            >
+              <h3>Intraventricular <span class="info-icon">ℹ️</span></h3>
+              <p>Blood accumulates in the ventricles</p>
+            </div>
+            <div class="ich-info-item clickable" data-ich-type="Subarachnoid">
+              <h3>Subarachnoid <span class="info-icon">ℹ️</span></h3>
+              <p>Bleeding in the space between brain and skull</p>
+            </div>
+            <div class="ich-info-item clickable" data-ich-type="Subdural">
+              <h3>Subdural <span class="info-icon">ℹ️</span></h3>
+              <p>Blood collection between brain and dura mater</p>
+            </div>
+            <div class="ich-info-item clickable" data-ich-type="Epidural">
+              <h3>Epidural <span class="info-icon">ℹ️</span></h3>
+              <p>Bleeding between skull and dura mater</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <a href="detection.html" class="action-button primary">
+            Upload Another Scan
+          </a>
+          <button class="action-button secondary" onclick="window.print()">
+            Print Results
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ICH Type Detail Modal -->
+    <div class="modal-overlay" id="ich-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">&times;</button>
+        <h2 id="modal-title">ICH Type</h2>
+        <div id="modal-body">
+          <!-- Content inserted by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer with Collaboration Info -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="collaboration-info">
+          <h3>🤝 Collaborative Research Project</h3>
+          <p class="collaboration-partners">
+            <strong>Institut Teknologi Sumatra</strong> ×
+            <strong>Universiti Malaysia Perlis</strong>
+          </p>
+          <p class="collaboration-note">
+            This project is a collaborative academic research initiative between
+            Institut Teknologi Sumatra (Indonesia) and Universiti Malaysia
+            Perlis (Malaysia).
+          </p>
+        </div>
+        <div class="footer-divider"></div>
+        <p>© 2024 ICH Detection System | Academic Research Project</p>
+        <p class="footer-disclaimer">
+          ⚠️ This system is for research and demonstration purposes only. Not
+          intended for clinical diagnosis or patient care decisions.
+        </p>
+      </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/theme.js"></script>
+    <script src="js/results-multimodel.js"></script>
+    <script src="js/ich-modal.js"></script>
+    <script src="js/theme.js"></script>
+  </body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICH Detection System - Sistem Deteksi Perdarahan Intrakranial</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/dark-mode.css" />
+    <link rel="stylesheet" href="css/education-pages.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="logo-icon">🧠</span>
+          <span class="logo-text">ICH Detection</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="detection.html" class="nav-link">Detection</a>
+          <a href="about-ich.html" class="nav-link">About ICH</a>
+          <a href="methodology.html" class="nav-link">Methodology</a>
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Sistem Deteksi Perdarahan Intrakranial (ICH) Berbasis Deep Learning
+        </h1>
+        <p class="hero-subtitle">
+          Menggunakan Arsitektur Hybrid Cascade EfficientNet-V2 dan ConvNeXt
+        </p>
+        <p class="hero-description">
+          Clinical Decision Support System untuk deteksi dini dan triase
+          perdarahan intrakranial dari CT scan kepala
+        </p>
+        <a href="detection.html" class="cta-button">
+          Try Detection
+          <span class="arrow">→</span>
+        </a>
+        <p class="disclaimer">
+          ⚠️ For academic research and demonstration purposes only
+        </p>
+      </div>
+    </section>
+
+    <!-- Developer Information -->
+    <section class="developer-section">
+      <div class="section-container">
+        <div class="developer-card">
+          <h2 class="section-title">Developer Information</h2>
+          <div class="developer-info">
+            <div class="info-row">
+              <span class="info-label">Nama:</span>
+              <span class="info-value">Putra Faaris Prayoga</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Program Studi:</span>
+              <span class="info-value">Teknik Biomedis</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Institusi:</span>
+              <span class="info-value"
+                >Institut Teknologi Sumatera (ITERA)</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Background and Motivation -->
+    <section class="motivation-section">
+      <div class="section-container">
+        <h2 class="section-title">Background and Motivation</h2>
+
+        <div class="motivation-grid">
+          <div class="motivation-card">
+            <div class="motivation-icon">⚠️</div>
+            <h3>Medical Urgency</h3>
+            <p>
+              Intracranial Hemorrhage (ICH) is a critical medical emergency with
+              mortality rates reaching up to
+              <strong>40% within 30 days</strong> if not diagnosed and treated
+              promptly. Early detection is crucial for improving patient
+              outcomes.
+            </p>
+          </div>
+
+          <div class="motivation-card">
+            <div class="motivation-icon">👨‍⚕️</div>
+            <h3>Human Resource Limitation</h3>
+            <p>
+              The radiologist ratio in Indonesia, especially in Sumatra, is
+              significantly
+              <strong>below WHO recommendation</strong> of 1 radiologist per
+              20,000 population. This shortage increases the risk of delayed
+              diagnosis and missed critical findings.
+            </p>
+          </div>
+
+          <div class="motivation-card">
+            <div class="motivation-icon">🔍</div>
+            <h3>Technical Challenge</h3>
+            <p>
+              Manual CT scan interpretation is subject to
+              <strong>inter-observer variability</strong>
+              and can be time-consuming, especially in emergency situations
+              where rapid decision-making is essential for patient survival.
+            </p>
+          </div>
+
+          <div class="motivation-card">
+            <div class="motivation-icon">🤖</div>
+            <h3>Proposed Solution</h3>
+            <p>
+              This system functions as a
+              <strong>Clinical Decision Support System (CDSS)</strong> designed
+              for early triage assistance. It aims to support radiologists and
+              emergency physicians by providing rapid preliminary analysis.
+              <strong>This system does not replace radiologists</strong> but
+              serves as an assistive tool.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What is ICH Section -->
+    <section class="about-section">
+      <div class="section-container">
+        <h2 class="section-title">What is Intracranial Hemorrhage?</h2>
+        <p class="section-text">
+          Intracranial hemorrhage (ICH) is bleeding within the skull, a critical
+          medical emergency requiring rapid diagnosis and treatment. ICH can
+          occur in different locations within the brain, each with distinct
+          clinical implications.
+        </p>
+
+        <div class="ich-types">
+          <div class="ich-card">
+            <h3>Intraparenchymal (IPH)</h3>
+            <p>
+              Bleeding within brain tissue, often caused by hypertension or
+              trauma
+            </p>
+          </div>
+          <div class="ich-card">
+            <h3>Intraventricular (IVH)</h3>
+            <p>
+              Bleeding into the brain's ventricles, affecting cerebrospinal
+              fluid circulation
+            </p>
+          </div>
+          <div class="ich-card">
+            <h3>Subarachnoid (SAH)</h3>
+            <p>
+              Bleeding in the space between the brain and surrounding membrane
+            </p>
+          </div>
+          <div class="ich-card">
+            <h3>Subdural (SDH)</h3>
+            <p>Blood collection between the brain and its outermost covering</p>
+          </div>
+          <div class="ich-card">
+            <h3>Epidural (EDH)</h3>
+            <p>
+              Bleeding between the skull and the outer membrane of the brain
+            </p>
+          </div>
+        </div>
+
+        <div class="learn-more">
+          <a href="about-ich.html" class="learn-more-button">
+            Learn More About ICH Types →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Overview Section -->
+    <section id="research" class="research-section">
+      <div class="section-container">
+        <h2 class="section-title">System Overview</h2>
+        <p class="section-text">
+          This system uses advanced deep learning techniques to analyze brain CT
+          scans and detect multiple types of intracranial hemorrhages
+          simultaneously using a hybrid cascade architecture.
+        </p>
+
+        <div class="approach-grid">
+          <div class="approach-card">
+            <div class="approach-icon">🔬</div>
+            <h3>Medical Image Processing</h3>
+            <p>
+              DICOM files are processed using Hounsfield Unit (HU) windowing
+              with three specialized windows (Blood, Brain, Bone) to create
+              optimal input for the neural network, enhancing hemorrhage
+              visibility across different tissue types.
+            </p>
+          </div>
+
+          <div class="approach-card">
+            <div class="approach-icon">🧠</div>
+            <h3>Hybrid Deep Learning Architecture</h3>
+            <p>
+              A cascade architecture combining EfficientNet-V2 for fine-grained
+              local feature extraction and ConvNeXt for global spatial context
+              understanding. This hybrid approach enables comprehensive
+              multi-label classification across all ICH subtypes.
+            </p>
+          </div>
+
+          <div class="approach-card">
+            <div class="approach-icon">⚡</div>
+            <h3>Rapid Multi-Model Analysis</h3>
+            <p>
+              The system employs three independent trained models running in
+              parallel to provide robust predictions with cross-validation.
+              Results are presented comparatively to increase diagnostic
+              confidence and reduce false negatives.
+            </p>
+          </div>
+        </div>
+
+        <div class="learn-more">
+          <a href="methodology.html" class="learn-more-button">
+            Explore Technical Methodology →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collaboration Section -->
+    <section class="collaboration-section">
+      <div class="section-container">
+        <h2 class="section-title">Collaborative Research Project</h2>
+        <div class="collaboration-box">
+          <div class="collaboration-logos">
+            <div class="logo-item">
+              <img
+                src="images\itera.png"
+                alt="Logo Institut Teknologi Sumatra"
+                class="logo-img"
+              />
+              <p>Institut Teknologi Sumatra</p>
+            </div>
+            <div class="collaboration-symbol">×</div>
+            <div class="logo-item">
+              <img
+                src="images\unimap.png"
+                alt="Logo Universiti Malaysia Perlis"
+                class="logo-img"
+              />
+              <p>Universiti Malaysia Perlis</p>
+            </div>
+          </div>
+          <p class="collaboration-description">
+            This project represents a collaborative academic research initiative
+            between Institut Teknologi Sumatra (Indonesia) and Universiti
+            Malaysia Perlis (Malaysia), focusing on the application of
+            artificial intelligence in medical imaging and clinical decision
+            support systems.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="collaboration-info">
+          <h3>🤝 Collaborative Research Project</h3>
+          <p class="collaboration-partners">
+            <strong>Institut Teknologi Sumatra</strong> ×
+            <strong>Universiti Malaysia Perlis</strong>
+          </p>
+          <p class="collaboration-note">
+            This project is a collaborative academic research initiative between
+            Institut Teknologi Sumatra (Indonesia) and Universiti Malaysia
+            Perlis (Malaysia).
+          </p>
+        </div>
+        <div class="footer-divider"></div>
+        <p>© 2024 ICH Detection System | Academic Research Project</p>
+        <p class="footer-disclaimer">
+          ⚠️ This system is for research and demonstration purposes only. Not
+          intended for clinical diagnosis or patient care decisions. Always
+          consult qualified healthcare professionals for medical advice.
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+  </body>
+</html>

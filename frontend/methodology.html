@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Methodology - ICH Detection System</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/dark-mode.css" />
+    <link rel="stylesheet" href="css/education-pages.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span class="logo-icon">🧠</span>
+          <span class="logo-text">ICH Detection</span>
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="detection.html" class="nav-link">Detection</a>
+          <a href="about-ich.html" class="nav-link">About ICH</a>
+          <a href="methodology.html" class="nav-link active">Methodology</a>
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="header-container">
+        <h1 class="page-title">Technology and Methodology</h1>
+        <p class="page-subtitle">
+          Technical implementation of the AI-based ICH detection system
+        </p>
+      </div>
+    </section>
+
+    <!-- Dataset Section -->
+    <section class="content-section">
+      <div class="section-container">
+        <h2 class="content-title">Dataset</h2>
+        <div class="dataset-card">
+          <div class="dataset-info">
+            <div class="info-row-large">
+              <span class="info-label-large">Dataset Name:</span>
+              <span class="info-value-large"
+                >RSNA Intracranial Hemorrhage Dataset</span
+              >
+            </div>
+            <div class="info-row-large">
+              <span class="info-label-large">Source:</span>
+              <span class="info-value-large"
+                >Kaggle (Radiological Society of North America)</span
+              >
+            </div>
+            <div class="info-row-large">
+              <span class="info-label-large">Sample Size:</span>
+              <span class="info-value-large"
+                >More than 25,000 head CT scans</span
+              >
+            </div>
+            <div class="info-row-large">
+              <span class="info-label-large">Format:</span>
+              <span class="info-value-large">DICOM (.dcm) files</span>
+            </div>
+            <div class="info-row-large">
+              <span class="info-label-large">Labels:</span>
+              <span class="info-value-large"
+                >Multi-label annotations for 5 ICH subtypes + Any ICH</span
+              >
+            </div>
+          </div>
+          <div class="dataset-description">
+            <p>
+              The RSNA Intracranial Hemorrhage dataset is a large-scale,
+              expertly annotated collection of brain CT scans specifically
+              curated for developing and evaluating automated ICH detection
+              algorithms. Each scan has been reviewed and labeled by
+              board-certified radiologists, ensuring high-quality ground truth
+              annotations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Preprocessing Section -->
+    <section class="preprocessing-section">
+      <div class="section-container">
+        <h2 class="content-title">Image Preprocessing Pipeline</h2>
+        <p class="section-intro">
+          Medical CT scans require specialized preprocessing to enhance
+          hemorrhage visibility and prepare data for deep learning models.
+        </p>
+
+        <div class="pipeline-steps">
+          <div class="pipeline-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>DICOM Input</h3>
+              <p>
+                System accepts DICOM (.dcm) files, the standard format for
+                medical imaging. DICOM contains both image data and metadata
+                (patient information, scan parameters).
+              </p>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Hounsfield Units Conversion</h3>
+              <p>
+                Raw pixel values are converted to Hounsfield Units (HU), a
+                standardized scale for measuring radiodensity. This
+                normalization ensures consistency across different scanners and
+                imaging protocols.
+              </p>
+              <div class="code-box">
+                <code>HU = pixel_value × RescaleSlope + RescaleIntercept</code>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Three-Channel Windowing</h3>
+              <p>
+                Three different HU windowing settings are applied to emphasize
+                different tissue types, creating a pseudo-RGB representation:
+              </p>
+              <div class="windowing-grid">
+                <div class="window-card brain-window">
+                  <h4>Brain Window</h4>
+                  <p class="window-params">WL: 40 HU | WW: 80 HU</p>
+                  <p>
+                    Optimizes visualization of brain parenchyma and gray-white
+                    matter differentiation
+                  </p>
+                </div>
+                <div class="window-card blood-window">
+                  <h4>Blood Window</h4>
+                  <p class="window-params">WL: 75 HU | WW: 215 HU</p>
+                  <p>
+                    Enhances detection of acute hemorrhage and blood products
+                  </p>
+                </div>
+                <div class="window-card bone-window">
+                  <h4>Bone Window</h4>
+                  <p class="window-params">WL: 600 HU | WW: 2800 HU</p>
+                  <p>Shows skull structures and helps identify fractures</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>RGB Tensor Formation</h3>
+              <p>
+                The three windowed images are stacked to create a 3-channel
+                RGB-like tensor:
+              </p>
+              <ul class="tech-list">
+                <li><strong>Red Channel:</strong> Blood window values</li>
+                <li><strong>Green Channel:</strong> Brain window values</li>
+                <li><strong>Blue Channel:</strong> Bone window values</li>
+              </ul>
+              <p>
+                This multi-window approach provides the neural network with
+                comprehensive information about different tissue densities
+                simultaneously, improving hemorrhage detection across all
+                subtypes.
+              </p>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h3>Normalization and Resizing</h3>
+              <p>
+                Images are normalized to [0, 1] range and resized to 256×256
+                pixels for efficient neural network processing while maintaining
+                diagnostic features.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="preprocessing-note">
+          <h4>🎯 Purpose of Multi-Window Preprocessing</h4>
+          <p>
+            Different ICH subtypes have varying radiodensities and locations. By
+            using three complementary windows, the system can detect hemorrhages
+            regardless of their density or proximity to bone, significantly
+            improving sensitivity and specificity compared to single-window
+            approaches.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Model Architecture Section -->
+    <section class="architecture-section">
+      <div class="section-container">
+        <h2 class="content-title">Model Architecture</h2>
+
+        <div class="model-name-card">
+          <h3 class="model-name-title">Cascade EfficientNet-V2-ConvNeXt</h3>
+          <p class="model-subtitle">
+            Hybrid Deep Learning Architecture for Multi-Label ICH Classification
+          </p>
+        </div>
+
+        <div class="architecture-content">
+          <h3>Working Principle</h3>
+          <p class="architecture-intro">
+            The system employs a novel cascade architecture that combines the
+            strengths of two state-of-the-art convolutional neural networks in a
+            sequential refinement process.
+          </p>
+
+          <div class="architecture-components">
+            <div class="component-card frontend">
+              <div class="component-header">
+                <h4>Front-End Network: EfficientNet-V2</h4>
+                <span class="component-badge">Local Features</span>
+              </div>
+              <div class="component-content">
+                <p>
+                  <strong>Role:</strong> Initial feature extraction and local
+                  pattern recognition
+                </p>
+                <h5>Key Characteristics:</h5>
+                <ul>
+                  <li>
+                    Focuses on <strong>fine-grained</strong> and
+                    <strong>local features</strong>
+                  </li>
+                  <li>
+                    Efficient compound scaling of network depth, width, and
+                    resolution
+                  </li>
+                  <li>Optimized training speed with Fused-MBConv blocks</li>
+                  <li>
+                    Excels at detecting small hemorrhages and subtle density
+                    changes
+                  </li>
+                  <li>
+                    Progressive feature resolution for multi-scale detection
+                  </li>
+                </ul>
+                <h5>Why EfficientNet-V2?</h5>
+                <p>
+                  EfficientNet-V2 provides superior parameter efficiency while
+                  maintaining high accuracy. Its compound scaling approach
+                  ensures optimal resource utilization, critical for medical
+                  imaging applications requiring detailed feature extraction.
+                </p>
+              </div>
+            </div>
+
+            <div class="cascade-connector">
+              <div class="connector-line"></div>
+              <div class="connector-label">Cascade Feature Fusion</div>
+              <div class="connector-line"></div>
+            </div>
+
+            <div class="component-card backend">
+              <div class="component-header">
+                <h4>Back-End Network: ConvNeXt</h4>
+                <span class="component-badge">Global Context</span>
+              </div>
+              <div class="component-content">
+                <p>
+                  <strong>Role:</strong> Global spatial context understanding
+                  and feature refinement
+                </p>
+                <h5>Key Characteristics:</h5>
+                <ul>
+                  <li>
+                    Enhances
+                    <strong>global spatial relationships</strong> between
+                    features
+                  </li>
+                  <li>
+                    Modern convolution design with large kernel sizes (7×7)
+                  </li>
+                  <li>
+                    Layer normalization and GELU activation for stable training
+                  </li>
+                  <li>
+                    Captures anatomical relationships between brain regions
+                  </li>
+                  <li>Integrates information across the entire image field</li>
+                </ul>
+                <h5>Why ConvNeXt?</h5>
+                <p>
+                  ConvNeXt modernizes standard CNNs with Vision
+                  Transformer-inspired improvements while maintaining the
+                  efficiency and interpretability of convolutional
+                  architectures. Its ability to model long-range dependencies is
+                  crucial for understanding ICH spatial distribution patterns.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cascade-mechanism">
+            <h3>Cascade Mechanism</h3>
+            <div class="mechanism-content">
+              <p>
+                The cascade architecture enables
+                <strong>progressive feature refinement</strong>
+                through a two-stage process:
+              </p>
+              <ol class="mechanism-steps">
+                <li>
+                  <strong>Stage 1 (EfficientNet-V2):</strong> Extracts
+                  hierarchical local features at multiple scales, identifying
+                  candidate hemorrhage regions and low-level patterns
+                </li>
+                <li>
+                  <strong>Feature Fusion:</strong> Selected feature maps from
+                  EfficientNet-V2 are forwarded to ConvNeXt through skip
+                  connections, preserving fine-grained details
+                </li>
+                <li>
+                  <strong>Stage 2 (ConvNeXt):</strong> Refines features with
+                  global context awareness, distinguishing true hemorrhages from
+                  artifacts and integrating spatial relationships
+                </li>
+                <li>
+                  <strong>Classification Head:</strong> Multi-label classifier
+                  produces confidence scores for each of the six ICH categories
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="architecture-diagram-placeholder">
+            <div class="placeholder-box">
+              <p class="placeholder-text">📐 Cascade Architecture Diagram</p>
+              <p class="placeholder-note">
+                Visualization showing EfficientNet-V2 → Feature Fusion →
+                ConvNeXt → Classification
+              </p>
+              <div class="placeholder-flow">
+                <div class="flow-item">Input (256×256×3)</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">EfficientNet-V2</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">Feature Fusion</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">ConvNeXt</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">6 ICH Classes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="architecture-advantages">
+          <h3>Advantages of Hybrid Cascade Architecture</h3>
+          <div class="advantage-grid">
+            <div class="advantage-card">
+              <div class="advantage-icon">🎯</div>
+              <h4>Improved Accuracy</h4>
+              <p>
+                Combines local and global features for comprehensive hemorrhage
+                detection across all sizes and locations
+              </p>
+            </div>
+            <div class="advantage-card">
+              <div class="advantage-icon">⚖️</div>
+              <h4>Balanced Sensitivity-Specificity</h4>
+              <p>
+                Two-stage refinement reduces false positives while maintaining
+                high sensitivity for small hemorrhages
+              </p>
+            </div>
+            <div class="advantage-card">
+              <div class="advantage-icon">🔄</div>
+              <h4>Feature Reusability</h4>
+              <p>
+                Cascade connections enable efficient feature sharing and
+                gradient flow, improving training stability
+              </p>
+            </div>
+            <div class="advantage-card">
+              <div class="advantage-icon">📊</div>
+              <h4>Multi-Label Capability</h4>
+              <p>
+                Architecture naturally handles multiple concurrent hemorrhage
+                types, reflecting clinical reality
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Model Approach -->
+    <section class="multimodel-section">
+      <div class="section-container">
+        <h2 class="content-title">Multi-Model Validation Approach</h2>
+        <p class="section-intro">
+          The system employs three independently trained models to provide
+          robust predictions and reduce uncertainty.
+        </p>
+
+        <div class="multimodel-grid">
+          <div class="multimodel-card">
+            <h4>Model A - Primary</h4>
+            <p>Trained with standard augmentation and balanced sampling</p>
+          </div>
+          <div class="multimodel-card">
+            <h4>Model B - Secondary</h4>
+            <p>
+              Trained with different initialization and augmentation strategies
+            </p>
+          </div>
+          <div class="multimodel-card">
+            <h4>Model C - Validation</h4>
+            <p>Trained with emphasis on challenging cases and edge scenarios</p>
+          </div>
+        </div>
+
+        <div class="multimodel-benefits">
+          <h4>Benefits of Multi-Model Approach:</h4>
+          <ul>
+            <li>Reduces model-specific biases and overfitting</li>
+            <li>Provides confidence intervals through prediction variance</li>
+            <li>
+              Enables cross-validation without requiring separate test set
+            </li>
+            <li>Improves reliability in clinical decision support scenarios</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="specifications-section">
+      <div class="section-container">
+        <h2 class="content-title">Technical Specifications</h2>
+        <div class="specs-grid">
+          <div class="spec-card">
+            <h4>Input Resolution</h4>
+            <p>256 × 256 × 3 (RGB)</p>
+          </div>
+          <div class="spec-card">
+            <h4>Output Classes</h4>
+            <p>6 (Multi-label Binary)</p>
+          </div>
+          <div class="spec-card">
+            <h4>Training Framework</h4>
+            <p>TensorFlow / Keras</p>
+          </div>
+          <div class="spec-card">
+            <h4>Loss Function</h4>
+            <p>Binary Cross-Entropy</p>
+          </div>
+          <div class="spec-card">
+            <h4>Optimizer</h4>
+            <p>Adam with Learning Rate Scheduling</p>
+          </div>
+          <div class="spec-card">
+            <h4>Batch Size</h4>
+            <p>32 (Training)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="collaboration-info">
+          <h3>🤝 Collaborative Research Project</h3>
+          <p class="collaboration-partners">
+            <strong>Institut Teknologi Sumatra</strong> ×
+            <strong>Universiti Malaysia Perlis</strong>
+          </p>
+        </div>
+        <div class="footer-divider"></div>
+        <p>© 2024 ICH Detection System | Academic Research Project</p>
+      </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+  </body>
+</html>
